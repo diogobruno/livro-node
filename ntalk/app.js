@@ -9,9 +9,12 @@ app = express();
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
+app.use(express.cookieParser('Ntalk'));
+app.use(express.session());
+app.use(express.bodyParser());
 app.use(express.static(__dirname + '/public'));
 
-load('models')
+load('models', {verbose: true})
   .then('controllers')
   .then('routes')
   .into(app);
