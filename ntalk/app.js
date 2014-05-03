@@ -3,9 +3,10 @@
  * Module dependencies.
  */
 
-var express = require('express'),
-load = require('express-load'),
-app = express();
+var express = require('express')
+, app = express()
+, load = require('express-load')
+, error = require('./middleware/error');
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -18,6 +19,9 @@ load('models', {verbose: true})
   .then('controllers')
   .then('routes')
   .into(app);
+
+app.use(error.noFound);
+app.use(error.serverError);
 
 app.listen(3000, function(){
   console.log("Ntalk no ar.");
