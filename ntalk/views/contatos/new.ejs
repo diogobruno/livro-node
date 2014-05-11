@@ -1,0 +1,15 @@
+<% include ../header %>
+<header>
+  <h2>Ntalk - Novo contato</h2>
+</header>
+<section>
+  <form action="/contato" method="post">
+    <label>Nome:</label>
+    <input type="text" name="contato[nome]">
+    <label>E-mail:</label>
+    <input type="text" name="contato[email]">
+    <button type="submit">Salvar</button>
+  </form>
+</section>
+<% include ../exit %>
+<% include ../footer %>

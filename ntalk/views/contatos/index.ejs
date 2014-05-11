@@ -4,24 +4,27 @@
 </header>
 <section>
   <p>Bem-vindo <%- usuario.nome %></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>E-mail</th>
-        <th>Ação</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% contatos.forEach(function(contato, index) { %>
-      <tr>
-        <td><%- contato.nome %></td>
-        <td><%- contato.email %></td>
-        <td><a href="/contato/<%- index %>">Detalhes</a></td>
-      </tr>
-      <% }) %>
-    </tbody>
-  </table>
+  <p><a href="/contato/novo">Adicionar contato</a>
+  <% if (contatos) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>E-mail</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% contatos.forEach(function(contato, index) { %>
+        <tr>
+          <td><%- contato.nome %></td>
+          <td><%- contato.email %></td>
+          <td><a href="/contato/<%- index %>">Detalhes</a></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
 </section>
 <% include ../exit %>
 <% include ../footer %>

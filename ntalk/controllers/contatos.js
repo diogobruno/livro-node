@@ -7,6 +7,9 @@ module.exports = function (app) {
       , params = {usuario: usuario, contatos: contatos};
       res.render('contatos/index', params);
     },
+    new: function(req, res) {
+      res.render('contatos/new');
+    },
     create: function(req, res) {
       var contato = req.body.contato
       , usuario = req.session.usuario;
