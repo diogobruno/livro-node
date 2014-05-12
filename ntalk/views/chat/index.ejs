@@ -1,0 +1,33 @@
+<% include ../header %>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+$(function(){
+
+  var socket = io.connect('http://localhost:3000');
+  var chat = $('#chat');
+
+  socket.on('send-client', function(msg) {
+    chat.html(chat.html() + msg);
+  });
+
+  $('#enviar').click(function() {
+    var nome = $('#nome').val();
+    var msg  = $('#msg').val();
+    socket.emit('send-server', {nome: nome, msg: msg});
+    console.log('msg sended!'); 
+  });
+
+});
+</script>
+<header>
+  <h2>Ntalk - Chat</h2>
+</header>
+<section>
+  <div id="chat"></div>
+  <input type="hidden" id="nome" value="<%-usuario.nome %>">
+  <input type="text" id="msg" placeholder="Mensagem">
+  <button id="enviar">Enviar</button>
+</section>
+<% include ../exit %>
+<% include ../footer %>
