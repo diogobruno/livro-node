@@ -12,9 +12,7 @@ $(function(){
   });
 
   $('#enviar').click(function() {
-    var nome = $('#nome').val();
-    var msg  = $('#msg').val();
-    socket.emit('send-server', {nome: nome, msg: msg});
+    socket.emit('send-server', $('#msg').val());
     console.log('msg sended!'); 
   });
 
@@ -25,7 +23,6 @@ $(function(){
 </header>
 <section>
   <div id="chat"></div>
-  <input type="hidden" id="nome" value="<%-usuario.nome %>">
   <input type="text" id="msg" placeholder="Mensagem">
   <button id="enviar">Enviar</button>
 </section>
