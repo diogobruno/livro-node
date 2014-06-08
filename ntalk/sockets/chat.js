@@ -5,6 +5,17 @@ module.exports = function(io) {
   sockets.on('connection', function(client) {
     var session = client.handshake.session
     , usuario = session.usuario;
+    client.set('email', usuario.email);
+
+    // notify online client
+    var onlines = sockets.clients();
+    onlines.forEach(function(online){
+      var online = sockets.socket[online.id];
+      online.get('email', function(erro, email){
+        client.emit('notify-onlines', email);
+        client.broadcast.emit('notify-onlines', email);
+      });
+    });
     
     //create chat room
     client.on('join', function(sala) {
@@ -17,12 +28,15 @@ module.exports = function(io) {
       }
       client.set('sala', sala);
       client.join(sala);
-      console.log('join sala: ' + sala)
+      console.log('JOIN SALA: ' + sala)
     });
 
     // disconnect client
     client.on('disconnect', function() {
       client.get('sala', function(erro, sala){
+        var msg = "<b>" + usuario.nome + "</b> saiu. <br>";
+        client.broadcast.emit('notify-offline', usuario.email);
+        sockets.in(sala).emit('send-client', msg);
         client.leave(sala);
       });
     });
