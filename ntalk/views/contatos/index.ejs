@@ -11,6 +11,7 @@
         <tr>
           <th>Nome</th>
           <th>E-mail</th>
+          <th>Status</th>
           <th>Ação</th>
         </tr>
       </thead>
@@ -19,6 +20,7 @@
         <tr>
           <td><%- contato.nome %></td>
           <td><%- contato.email %></td>
+          <td id="notify_<%- contato.email %>">Status here!</td>
           <td>
             <a href="/contato/<%- index %>">Detalhes</a>
             <a href="/chat/<%- contato.email %>" id="chat_<%- contato.email %>">Conversar</a>

@@ -10,7 +10,7 @@ module.exports = function(io) {
     // notify online client
     var onlines = sockets.clients();
     onlines.forEach(function(online){
-      var online = sockets.socket[online.id];
+      var online = sockets.sockets[online.id];
       online.get('email', function(erro, email){
         client.emit('notify-onlines', email);
         client.broadcast.emit('notify-onlines', email);
